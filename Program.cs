@@ -3,15 +3,45 @@ using System.Collections.Generic;
 
 namespace CatWorx.BadgeMaker
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-			string[] favFoods = new string[3]{ "pizza", "doughnuts", "icecream" };
-			string firstFood = favFoods[0];
-			string secondFood = favFoods[1];
-			string thirdFood = favFoods[2];
-			Console.WriteLine("I like {0}, {1}, and {2}", favFoods[0], favFoods[1], favFoods[2]);
-        }
-    }
+  class Program
+  {
+		static void Main(string[] args)
+		{
+			List<Employee> employees = GetEmployees();
+			PrintEmployees(employees);
+		}
+		
+		static List<Employee> GetEmployees()
+		{
+			List<Employee> employees = new List<Employee>();
+			while(true)
+			{
+				Console.WriteLine("Please enter a first name: ");
+				string firstName = Console.ReadLine();
+				if (firstName == "")
+				{
+					break;
+				}
+				Console.WriteLine("Please enter a last name: ");
+				string lastName = Console.ReadLine();
+				Console.WriteLine("Please enter an id: ");
+				int id = Int32.Parse(Console.ReadLine());
+				Console.WriteLine("Please enter a photo url: ");
+				string photoUrl = Console.ReadLine();
+				
+				Employee currentEmployee = new Employee(firstName, lastName, id, photoUrl);
+				employees.Add(currentEmployee);
+			}
+			return employees;
+		}
+		
+		static void PrintEmployees(List<Employee> employees)
+		{
+			string template = "{0,-10}\t{1,-20}\t{2}";
+			for (int i = 0; i < employees.Count; i++) 
+			{
+				Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetName(), employees[i].GetPhotoUrl()));
+			}
+		}
+  }
 }
