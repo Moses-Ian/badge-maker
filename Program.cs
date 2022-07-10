@@ -8,7 +8,8 @@ namespace CatWorx.BadgeMaker
 		static void Main(string[] args)
 		{
 			List<Employee> employees = GetEmployees();
-			PrintEmployees(employees);
+			Util.PrintEmployees(employees);
+			Util.MakeCSV(employees);
 		}
 		
 		static List<Employee> GetEmployees()
@@ -35,13 +36,5 @@ namespace CatWorx.BadgeMaker
 			return employees;
 		}
 		
-		static void PrintEmployees(List<Employee> employees)
-		{
-			string template = "{0,-10}\t{1,-20}\t{2}";
-			for (int i = 0; i < employees.Count; i++) 
-			{
-				Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetName(), employees[i].GetPhotoUrl()));
-			}
-		}
   }
 }
